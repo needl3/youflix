@@ -17,7 +17,7 @@ export default function SearchBar() {
     return (
         <div className="items-center flex h-10 w-5/12">
             <div className="border rounded-l-full border-[#aaaaaa] pl-4 h-full w-full" onKeyDown={searchHandler}>
-                <input type="text" placeholder="Search" name="query-bar" onChange={onChange} className="focus:outline-none text-lg h-full" />
+                <input type="text" placeholder="Search" name="query-bar" onChange={onChange} className="focus:outline-none text-lg h-full w-full" />
             </div>
             <button onClick={searchHandler} className="px-2 border border-l-0 border-[#aaaaaa] rounded-r-full h-full flex">
                 <Search />

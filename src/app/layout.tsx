@@ -2,6 +2,9 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Nav from '@/components/Nav'
+import { getServerSession } from 'next-auth'
+import authOptions from "@/pages/api/auth/[...nextauth]"
+import SessionContext from '@/components/Context/SessionContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,17 +13,21 @@ export const metadata: Metadata = {
     description: 'Watch Movies Free For Life',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
+    const session = await getServerSession(authOptions)
     return (
         <html lang="en">
-            <body className={inter.className}>
-                <Nav />
-                {children}
-            </body>
+            {/* @ts-expect-error Server Component */}
+            <SessionContext session={session}>
+                <body className={inter.className}>
+                    <Nav />
+                    {children}
+                </body>
+            </SessionContext>
         </html>
     )
 }

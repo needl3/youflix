@@ -1,3 +1,5 @@
+"use client"
+
 import ToggleButton from '@/assets/site/toggle.svg'
 import SiteLogo from '@/assets/site/logo.svg'
 import SearchBar from './SearchBar'
@@ -5,12 +7,12 @@ import User from './User'
 import Notifications from './Notifications'
 import SignIn from './SignIn'
 import Link from 'next/link'
-
-const loggedIn = false
+import { useSession } from 'next-auth/react'
 
 export default function Nav() {
+    const session = useSession()
     return (
-        <nav className="flex justify-between px-4 items-center fixed w-full">
+        <nav className="flex justify-between px-4 items-center sticky w-full">
             <div className="flex items-center">
                 <div className="p-2 rounded-full hover:bg-slate-200 hover:cursor-pointer">
                     <ToggleButton />
@@ -23,11 +25,11 @@ export default function Nav() {
             </div>
             <SearchBar />
             {
-                loggedIn
+                session.data
                 ?
                 <div className="flex items-center">
                     <Notifications />
-                    <User />
+                    <User session={session.data}/>
                 </div>
                 :
                 <SignIn />
