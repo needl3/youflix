@@ -4,8 +4,6 @@ import ToggleButton from '@/assets/site/toggle.svg'
 import SiteLogo from '@/assets/site/logo.svg'
 import SearchBar from './SearchBar'
 import User from './User'
-import Notifications from './Notifications'
-import SignIn from './SignIn'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
@@ -24,16 +22,7 @@ export default function Nav() {
                 </div>
             </div>
             <SearchBar />
-            {
-                session.data
-                ?
-                <div className="flex items-center">
-                    <Notifications />
-                    <User session={session.data}/>
-                </div>
-                :
-                <SignIn />
-            }
+            <User session={session.data}/> 
         </nav>
     )
 }

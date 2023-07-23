@@ -27,7 +27,7 @@ export default function Notifications() {
     const notifs: NotificationInterface[] = notifsArr
 
     return <>
-        <div className='relative'>
+        <div className="relative">
             <div className="p-2 hover:bg-gray-200 hover:cursor-pointer rounded-full w-fit" onClick={() => setActive(!active)}>
                 <Notification />
             </div>
