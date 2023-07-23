@@ -1,5 +1,11 @@
+import LeftSection from "@/components/LeftSection";
+
 export default function Home() {
   return (
-        <p>This is body</p>                
+    <div>
+        <div id="left-bar">
+            <LeftSection />
+        </div>
+    </div>
   )
 }

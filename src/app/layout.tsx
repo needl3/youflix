@@ -5,6 +5,7 @@ import Nav from '@/components/Nav'
 import { getServerSession } from 'next-auth'
 import authOptions from "@/pages/api/auth/[...nextauth]"
 import SessionContext from '@/components/Context/SessionContext'
+import ReduxContext from '@/components/Context/ReduxContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,10 +24,12 @@ export default async function RootLayout({
         <html lang="en">
             {/* @ts-expect-error Server Component */}
             <SessionContext session={session}>
-                <body className={inter.className}>
-                    <Nav />
-                    {children}
-                </body>
+                <ReduxContext>
+                    <body className={inter.className}>
+                        <Nav />
+                        {children}
+                    </body>
+                </ReduxContext>
             </SessionContext>
         </html>
     )
