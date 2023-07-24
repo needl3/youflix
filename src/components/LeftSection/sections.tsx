@@ -79,5 +79,28 @@ export const dummyFollowers = [
         name: "PAnish",
         img: "https://yt3.ggpht.com/Q7cJ7tF0hoEiCPjGrah6OuNAKwKPP1l6FZfDeN17GsSL-jpUT7kHiRP744qmUd8pPzipevz_SyM=s88-c-k-c0x00ffffff-no-rj",
         href: "#"
+    },
+    {
+        name: "QAnish",
+        img: "https://yt3.ggpht.com/Q7cJ7tF0hoEiCPjGrah6OuNAKwKPP1l6FZfDeN17GsSL-jpUT7kHiRP744qmUd8pPzipevz_SyM=s88-c-k-c0x00ffffff-no-rj",
+        href: "#"
+    },
+    {
+        name: "RAnish",
+        img: "https://yt3.ggpht.com/Q7cJ7tF0hoEiCPjGrah6OuNAKwKPP1l6FZfDeN17GsSL-jpUT7kHiRP744qmUd8pPzipevz_SyM=s88-c-k-c0x00ffffff-no-rj",
+        href: "#"
+    },
+    {
+        name: "SAnish",
+        img: "https://yt3.ggpht.com/Q7cJ7tF0hoEiCPjGrah6OuNAKwKPP1l6FZfDeN17GsSL-jpUT7kHiRP744qmUd8pPzipevz_SyM=s88-c-k-c0x00ffffff-no-rj",
+        href: "#"
+    },
+    {
+        name: "UAnish",
+        img: "https://yt3.ggpht.com/Q7cJ7tF0hoEiCPjGrah6OuNAKwKPP1l6FZfDeN17GsSL-jpUT7kHiRP744qmUd8pPzipevz_SyM=s88-c-k-c0x00ffffff-no-rj",
+        href: "#"
     }
+
+
+
 ]

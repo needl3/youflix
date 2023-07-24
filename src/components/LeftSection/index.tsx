@@ -26,12 +26,17 @@ export default function LeftSection() {
         }, 2000)
     }
 
-    return <ul className="w-fit p-2 overflow-y-scroll flex flex-col">
+    //
+    // Major css bug
+    // Padding changing in ul while toggling left side bar
+    // Home icons should not change of it's position when toggling
+    //
+    return <ul>
         {
             mainMenu.map(m => <Link href={m.href} key={m.name}>
-                <li className={`flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm ${active ? "pr-14 pl-3 py-2 " : "px-3 py-5 justify-center"}`}>
+                <li className={`flex rounded-lg hover: cursor-pointer hover:bg-slate-400 items-center ${active ? "text-sm pl-3 flex-row pr-16 py-2 gap-x-6" : "text-[10px] flex-col p-1 py-4"}`}>
                     {m.icon}
-                    {active && <h1 className="px-6">{m.name}</h1>}
+                    <h1>{m.name}</h1>
                 </li>
             </Link>)
         }
@@ -39,26 +44,28 @@ export default function LeftSection() {
         {
             active ?
                 <>
-                    {followers.slice(0, followShowAll ?  -1 : DEFAULT_SHOW).map(f => <Link href={f.href} key={f.name}>
-                        <li className="flex rounded-lg pr-14 pl-3 py-2 hover: cursor-pointer hover:bg-slate-400 text-sm items-center">
+                    {followers.slice(0, followShowAll ? -1 : DEFAULT_SHOW).map(f => <Link href={f.href} key={f.name}>
+                        <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm items-center py-2 gap-x-6 pl-3 pr-16">
                             <img src={f.img} className="rounded-full" width='32px' height='32px' />
-                            <h1 className="px-6">{f.name}</h1>
+                            <h1>{f.name}</h1>
                         </li>
                     </Link>)
                     }
-                    <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm pr-14 pl-3 py-2"
+                    <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm items-center py-2 gap-x-6 pl-3 pr-16"
                         onClick={() => {
                             fetchMoreFollowers()
                             setFollowShowAll(!followShowAll)
                         }}
                     >
                         {followShowAll ? <ToggleShowUp /> : <ToggleShowDown />}
-                        <span className="px-6">{followShowAll ? "Show less" : "Show more"}</span>
+                        <span className="">{followShowAll ? "Show less" : "Show more"}</span>
                     </li>
                 </>
                 :
-                <li className={`flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm ${active ? "pr-14 pl-3 py-2 " : "px-3 py-6 justify-center"}`}>
+                <li className="flex flex-col rounded-lg hover: cursor-pointer hover:bg-slate-400 text-[10px] items-center p-1 py-4 w-2/3 ml-3">
                     <Followers />
+                    {/* ml-3 is temporary solution  ---------------------------*/}
+                    <h1>Followers</h1>
                 </li>
         }
     </ul>
