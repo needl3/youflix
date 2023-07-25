@@ -30,17 +30,17 @@ export const mainMenu: MainMenuSchema[] = [
     {
         name: "Completed",
         icon: <Completed />,
-        href: "/profile#completed"
+        href: "/completed"
     },
     {
         name: "Considering",
         icon: <Considering />,
-        href: "/profile#considering"
+        href: "/considering"
     },
     {
         name: "Watching",
         icon: <Watching />,
-        href: "/profile#watching"
+        href: "/watching"
     },
 ]
 

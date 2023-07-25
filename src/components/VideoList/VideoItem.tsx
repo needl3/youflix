@@ -1,6 +1,4 @@
-import { Bowlby_One_SC } from "next/font/google"
-import { VideoDataSchema } from "./video_data"
-import { parse } from "path"
+import { Prisma } from "@prisma/client"
 
 function parseViews(views: number): string {
     const sizeNum = String(views).length
@@ -17,6 +15,13 @@ function parseViews(views: number): string {
 }
 
 function parsePublishedDate(d: Date): string {
+
+    //
+    // Return X if publishedDate is not available or data not suitable
+    //
+    if (d.getTime() !== d.getTime())
+        return "X"
+
     const secondsElasped = Date.now() / 1000 - d.getTime() / 1000
 
     const oneYear = 365 * 24 * 60 * 60
@@ -54,28 +59,34 @@ function parseLength(ms: number) {
     let parsedLength = ""
     const hr = Math.floor(ms / oneHour)
     const min = Math.floor((ms - hr * oneHour) / oneMin)
-    const secs = Math.floor((ms - hr * oneHour - min * oneMin)/ oneSec)
+    const secs = Math.floor((ms - hr * oneHour - min * oneMin) / oneSec)
 
     if (ms > oneHour)
         parsedLength += String(hr) + ":"
     parsedLength += String(min) + ":"
-    parsedLength += String(secs).padStart(2,"0")
-        
+    parsedLength += String(secs).padStart(2, "0")
+
     return parsedLength
 }
 
-export default function VideoItem({ item }: { item: VideoDataSchema }) {
+//
+// Extending length and other types which are to be added in future
+//
+export default function VideoItem({ item }: { item: Prisma.MovieCreateManyInput }) {
     return <li>
         <div className="relative">
-            <img src={item.img} className="rounded-lg" />
-            <span className="absolute bottom-1 right-1 bg-white rounded-md px-1 text-sm">{parseLength(item.length)}</span>
+            <img src={item.image} className="rounded-lg h-52 w-full" />
+
+            {/* Length of movie */}
+            {false && <span className="absolute bottom-1 right-1 bg-white rounded-md px-1 text-sm">{parseLength(/* item.length */0 * 60 * 60 * 1000)}</span>}
         </div>
+
         <div className="flex pt-3 pb-8 gap-x-3">
-            <img src={item.studioImage} className="rounded-full bg-slate-300 w-10 h-10" />
+            {false && <img src={"supposed-to-be-studio-image"} className="rounded-full bg-slate-300 w-10 h-10" />}
             <div>
-                <h1 className="text-lg">{item.title}</h1>
-                <p className="text-sm">{item.studio}</p>
-                <p className="text-sm">{`${parseViews(item.views)} - ${parsePublishedDate(item.releasedAt)}`}</p>
+                <h1 className="text-lg">{item.name}</h1>
+                {item.productionHouse ? <p className="text-sm">{(item.productionHouse as string[])[0]}</p> : <></>}
+                <p className="text-sm">{`${parseViews(/* item.views || */ 0)} - ${item.released && parsePublishedDate(new Date(item.released))}`}</p>
             </div>
         </div>
     </li>

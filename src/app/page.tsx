@@ -1,15 +1,18 @@
-import LeftSection from "@/components/LeftSection";
-import GenreSection from "@/components/RightSection/Genre";
-import VideoListSection from "@/components/RightSection/VideoList";
+import VideoListSection from "@/components/VideoList";
+import db from "@/server/prisma";
 
-export default function Home() {
+export default async function Home() {
+
+    //
+    // This page should return X amount of recently popular movies by default
+    // Then return recommended movies in infinite scrollable fashion
+    //
+    const videos = await db.movie.findMany({
+        skip: 0,
+        take: 10
+    })
+
     return (
-        <div className="flex">
-            <LeftSection />
-            <div id="right-section" className="ml-8 overflow-x-hidden">
-                <GenreSection />
-                <VideoListSection />
-            </div>
-        </div>
+        <VideoListSection videos={videos}/>
     )
 }
