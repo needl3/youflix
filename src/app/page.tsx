@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <div className="flex">
             <LeftSection />
-            <div id="right-section" className="flex flex-col items-start w-full">
+            <div id="right-section" className="ml-8 overflow-x-hidden">
                 <GenreSection />
                 <VideoListSection />
             </div>
