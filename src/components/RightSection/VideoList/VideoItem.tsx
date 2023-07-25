@@ -75,7 +75,7 @@ export default function VideoItem({ item }: { item: VideoDataSchema }) {
             <div>
                 <h1 className="text-lg">{item.title}</h1>
                 <p className="text-sm">{item.studio}</p>
-                <p className="text-sm">{`${parseViews(item.views)} - ${parsePublishedDate(item.uploadedAt)}`}</p>
+                <p className="text-sm">{`${parseViews(item.views)} - ${parsePublishedDate(item.releasedAt)}`}</p>
             </div>
         </div>
     </li>

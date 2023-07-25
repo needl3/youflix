@@ -6,7 +6,7 @@ generator client {
 datasource db {
     provider     = "postgresql"
     url          = env("DATABASE_URL")
-    relationMode = "prisma"
+    relationMode = "foreignKeys"
 }
 
 model Account {
@@ -30,26 +30,14 @@ model Account {
     @@map("accounts")
 }
 
-
-model User {
-    id                  String          @id @default(cuid())
-    name                String?
-    email               String?         @unique
-    emailVerified       DateTime?       @map("email_verified")
-    image               String?
-
-    accounts            Account[]
-    sessions            Session[]
-    @@map("users")
-}
-
 model Session {
     id                  String          @id @default(cuid())
     expires             DateTime
     sessionToken        String          @unique @map("session_token")
-    userId              String          @map("user_id")
     
+    userId              String          @map("user_id")
     user                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
     @@index([userId])
     @@map("sessions")
 }
@@ -61,4 +49,134 @@ model VerificationToken {
 
     @@unique([identifier, token])
     @@map("verificationtokens")
+}
+
+model User {
+    id                  String          @id @default(cuid())
+    name                String?
+    email               String?         @unique
+    emailVerified       DateTime?       @map("email_verified")
+    image               String?
+
+    accounts            Account[]
+    sessions            Session[]
+    reactions           Reaction[]
+    comments            Comment[]
+    considering         Considering[]
+    completed           Completed[]
+    watching            Watching[]
+    
+    @@index([id])
+
+    @@map("users")
+}
+
+model Movie {
+    id                  String          @id @default(cuid())
+    name                String
+    image               String?
+    description         String?
+    rating              Float?
+    released            DateTime?
+    origin              String
+    productionHouse     String[]
+    link                String
+
+    genre               String[]
+
+    reactions           Reaction[]
+    comments            Comment[]
+    considering         Considering[]
+    completed           Completed[]
+    watching            Watching[]
+
+    episodes            Episode[]
+    @@index([id])
+}
+
+model Episode {
+    epNo                Int             @id
+    sNo                 Int?
+    link                String
+
+    movieId             String
+    movie               Movie           @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+    @@index([movieId])
+}
+
+model Watching {
+    startedAt           DateTime
+    lastEpisode         Int
+    lastSeason          Int?
+
+    movieId             String
+    movie               Movie           @relation(fields: [movieId], references: [id])
+
+    userId              String
+    user                User            @relation(fields: [userId], references: [id])
+
+    @@id([movieId, userId])
+    @@index([userId])
+}
+
+model Completed {
+    startedAt           DateTime
+    completedAt         DateTime
+
+    movieId             String
+    movie               Movie           @relation(fields: [movieId], references: [id])
+
+    userId              String
+    user                User            @relation(fields: [userId], references: [id])
+
+    @@id([movieId, userId])
+    @@index([userId])
+}
+
+model Considering {
+    addedAt             DateTime
+
+    movieId             String
+    movie               Movie           @relation(fields: [movieId], references: [id])
+
+    userId              String
+    user                User            @relation(fields: [userId], references: [id])
+
+    @@id([movieId, userId])
+    @@index([userId])
+}
+
+model Comment {
+    id                  String          @id
+    content             String
+    publishedAt         DateTime
+
+    userId              String
+    user                User            @relation(fields: [userId], references: [id])
+
+    movieId             String
+    movie               Movie           @relation(fields: [movieId], references: [id])
+
+    parentCommentId     String?
+    comment             Comment?        @relation(name: "parentCommentRelation", fields: [parentCommentId], references: [id], onDelete: NoAction)
+
+    parentComment       Comment[]       @relation(name: "parentCommentRelation")
+}
+
+enum REACTIONS {
+    LIKE
+    DISLIKE
+}
+
+model Reaction {
+    reaction            REACTIONS
+
+    userId              String
+    movieId             String
+
+    user                User            @relation(fields: [userId], references: [id])
+    movie               Movie           @relation(fields: [movieId], references: [id])
+
+    @@id([userId, movieId])
 }

@@ -14,7 +14,7 @@ export default function Nav() {
     const session = useSession()
     return (
         <>
-            <nav className="flex justify-between px-4 items-center sticky w-full">
+            <nav className="flex justify-between px-4 items-center sticky w-full z-10">
                 <div className="flex items-center">
                     <div className="p-2 rounded-full hover:bg-slate-200 hover:cursor-pointer" onClick={() => dispatch(toggleLeftBar())}>
                         <ToggleButton />

@@ -7,7 +7,6 @@ import { useState } from "react"
 import Followers from "@/assets/sidebar/followers.svg"
 import ToggleShowUp from "@/assets/sidebar/toggleup.svg"
 import ToggleShowDown from "@/assets/sidebar/toggledown.svg"
-import { redirect } from "next/navigation"
 
 const DEFAULT_SHOW = 4
 
@@ -52,20 +51,20 @@ export default function LeftSection() {
             active ?
                 <>
                     {followers.slice(0, followShowAll ? -1 : DEFAULT_SHOW).map(f => <Link href={`profile/${f.href}`} key={f.name}>
-                        <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm items-center py-2 gap-x-6 pl-3 pr-16">
-                            <img src={f.img} className="rounded-full" width='32px' height='32px' />
+                        <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm items-center py-2 gap-x-6 pl-3 pr-14">
+                            <img src={f.img} className="rounded-full" width="25px" height="25px" />
                             <h1>{f.name}</h1>
                         </li>
                     </Link>)
                     }
-                    <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm items-center py-2 gap-x-6 pl-3 pr-16"
+                    <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm items-center py-2 gap-x-6 pl-3 pr-14"
                         onClick={() => {
                             fetchMoreFollowers()
                             setFollowShowAll(!followShowAll)
                         }}
                     >
                         {followShowAll ? <ToggleShowUp /> : <ToggleShowDown />}
-                        <span className="">{followShowAll ? "Show less" : "Show more"}</span>
+                        <span>{followShowAll ? "Show less" : "Show more"}</span>
                     </li>
                 </>
                 :
