@@ -22,7 +22,7 @@ export default function Genre() {
             // TODO: Blur effect around right of this button
             //
             genres.indexOf(selected) !== 0 &&
-            <button className="bg-white hover:bg-slate-200 transition duration-300 sticky left-0 rounded-full self-cente rotate-180" onClick={moveRight}>
+            <button className="bg-white hover:bg-slate-200 transition duration-300 sticky left-0 rounded-full self-cente rotate-180" onClick={moveLeft}>
                 <RightSign />
             </button >
         }
