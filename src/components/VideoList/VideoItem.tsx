@@ -75,7 +75,7 @@ function parseLength(ms: number) {
 export default function VideoItem({ item }: { item: Prisma.MovieCreateManyInput }) {
     return <li>
         <div className="relative">
-            <img src={item.image} className="rounded-lg h-52 w-full" />
+            <img src={item.image || "images/placeholder.png"} className="rounded-lg h-52 w-full" />
 
             {/* Length of movie */}
             {false && <span className="absolute bottom-1 right-1 bg-white rounded-md px-1 text-sm">{parseLength(/* item.length */0 * 60 * 60 * 1000)}</span>}
