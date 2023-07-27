@@ -10,6 +10,9 @@ const nextConfig = {
         config.externals.push("canvas")
         return config
     },
+    experimental: {
+        serverActions: true
+    }
 }
 
 module.exports = nextConfig
