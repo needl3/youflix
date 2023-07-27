@@ -9,18 +9,14 @@ async function testDBConnection(db: PrismaClient) {
     }
 }
 
-const prismaGlobal = global as typeof global & {
-    db?: PrismaClient
+
+const globalForPrisma = global as unknown as { db: PrismaClient }
+
+const db = globalForPrisma.db|| new PrismaClient()
+
+if (process.env.NODE_ENV !== 'production') {
+    if(!!!globalForPrisma.db) testDBConnection(db)
+    globalForPrisma.db = db 
 }
-
-let db: PrismaClient
-
-if (process.env.NODE_ENV !== "production") {
-    if (!prismaGlobal.db) {
-        prismaGlobal.db = new PrismaClient({log: ["info"]})
-        testDBConnection(prismaGlobal.db)
-    }
-    db = prismaGlobal.db
-} else db = new PrismaClient()
 
 export default db

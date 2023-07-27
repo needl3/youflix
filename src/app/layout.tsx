@@ -32,7 +32,7 @@ export default async function RootLayout({
                         <Nav />
                         <div className="flex">
                             <LeftSection />
-                            <div id="right-section" className="ml-8 overflow-x-hidden">
+                            <div id="right-section" className="ml-8 overflow-x-hidden pr-3">
                                 <GenreSection />
                                 {children}
                             </div>

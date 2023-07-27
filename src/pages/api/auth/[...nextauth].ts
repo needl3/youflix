@@ -6,7 +6,7 @@ import GoogleProvider from "next-auth/providers/google"
 declare module "next-auth" {
     interface Session {
         user: {
-            id?: string
+            id: string
         } & DefaultSession["user"]
     }
 }
@@ -22,7 +22,8 @@ export const authOptions: AuthOptions = {
     callbacks: {
         session: async(props) => {
             delete props.session.user?.email
-            props.session.user.id = props.token.sub
+            if(!!props.token.sub)
+                props.session.user.id = props.token.sub
             return props.session
         }
     },
