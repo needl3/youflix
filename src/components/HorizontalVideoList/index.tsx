@@ -4,14 +4,12 @@ import Link from "next/link"
 import VideoItem from "./VideoItem"
 import { useState } from "react";
 import { MovieDetail } from "@/data/types";
-import VideoSkeleton from "./VideoSkeleton";
-import { TAKE } from "@/data/misc";
 
 import RightSign from "@/assets/genre/right.svg"
 
 
 export default function VideoListSection({ name, videos, fetchMore }: { name?: string, videos: MovieDetail[], fetchMore: Function }) {
-    if (!videos) return <></>
+    if (!videos.length) return <></>
 
     const [paginatingVideos, setPaginatingVideos] = useState(videos)
     const [isLoading, setIsLoading] = useState(false)
@@ -29,12 +27,10 @@ export default function VideoListSection({ name, videos, fetchMore }: { name?: s
             slider.scrollLeft = slider.scrollLeft + 500
             if (slider.scrollLeft - prevState < 500) {
                 setIsLoading(true)
-                setTimeout(() => {
-                    fetchMore(page).then((r: MovieDetail[]) => {
-                        setPaginatingVideos([...paginatingVideos, ...r])
-                        setPage(page + 1)
-                    }).finally(() => setIsLoading(false))
-                }, 30000)
+                fetchMore(page).then((r: MovieDetail[]) => {
+                    setPaginatingVideos([...paginatingVideos, ...r])
+                    setPage(page + 1)
+                }).finally(() => setIsLoading(false))
             }
         }
     }

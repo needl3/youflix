@@ -10,7 +10,7 @@ async function fetchMoreVertical(page: number) {
     "use server"
     
     const session = await getServerSession(authOptions)
-    if (!session) return [] // This should return normal videos without preferences
+    // if (!session) return [] // This should return normal videos without preferences
 
 
     // This should return videos user is highly to enjoy/related/preferance based

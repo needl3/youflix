@@ -1,4 +1,4 @@
-import VideoListSection from "@/components/HorizontalVideoList"
+import VideoListSection from "@/components/VerticalVideoList"
 import { TAKE } from "@/data/misc"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import getWatching from "@/server/prisma/RawQueries/watching"
@@ -9,7 +9,6 @@ async function fetchMore(page: number, session: Session) {
     "use server"
 
     const newVideos = await getWatching({ limit: TAKE, page, userId: session.user.id })
-
     return newVideos
 }
 
@@ -19,10 +18,9 @@ export default async function Watching() {
     if (!session || !session.user.id)
         return redirect("/api/auth/signin") // TODO: Make a page to inform user to signup to use this feature
 
-    const completed = await getWatching({ limit: TAKE, page: 0, userId: session.user.id })
-
+    const completed = await fetchMore(0, session)
     return <>
-        <VideoListSection name="Watching" videos={completed} fetchMore={fetchMore} />
+        <VideoListSection videos={completed} fetchMore={fetchMore} />
     </>
 }
 
