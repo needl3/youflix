@@ -3,12 +3,12 @@
 import Link from "next/link"
 import VideoItem from "./VideoItem"
 import { useState } from "react";
-import { MovieDetail } from "@/data/types";
 
 import RightSign from "@/assets/genre/right.svg"
+import { Prisma } from "@prisma/client";
 
 
-export default function VideoListSection({ name, videos, fetchMore }: { name?: string, videos: MovieDetail[], fetchMore: Function }) {
+export default function VideoListSection({ name, videos, fetchMore }: { name?: string, videos: Prisma.MovieCreateInput[], fetchMore: Function }) {
     if (!videos.length) return <></>
 
     const [paginatingVideos, setPaginatingVideos] = useState(videos)
@@ -27,7 +27,7 @@ export default function VideoListSection({ name, videos, fetchMore }: { name?: s
             slider.scrollLeft = slider.scrollLeft + 500
             if (slider.scrollLeft - prevState < 500) {
                 setIsLoading(true)
-                fetchMore(page).then((r: MovieDetail[]) => {
+                fetchMore(page).then((r: Prisma.MovieCreateInput[]) => {
                     setPaginatingVideos([...paginatingVideos, ...r])
                     setPage(page + 1)
                 }).finally(() => setIsLoading(false))
@@ -44,7 +44,7 @@ export default function VideoListSection({ name, videos, fetchMore }: { name?: s
 
             <ul className="gap-x-4 w-full h-full overflow-x-scroll flex no-scrollbar scroll-smooth" id="slider">
                 {
-                    paginatingVideos.map(i => <Link href={"#"} key={i.name}>
+                    paginatingVideos.map(i => <Link href={`/movie/${i.id}`} key={i.id}>
                         <VideoItem item={i} />
                     </Link>)
                 }

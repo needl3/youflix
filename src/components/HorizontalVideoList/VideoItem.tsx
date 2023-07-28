@@ -1,19 +1,5 @@
 import { Prisma } from "@prisma/client"
 
-function parseViews(views: number): string {
-    const sizeNum = String(views).length
-    let toReturn = String(views)
-
-    if (sizeNum >= 4)
-        toReturn = String(views / 1000) + "K"
-    else if (sizeNum >= 7)
-        toReturn = String(views / 1000000) + "M"
-    else if (sizeNum >= 10)
-        toReturn = String(views / 1000000000) + "B"
-
-    return toReturn + " views"
-}
-
 function parsePublishedDate(d: Date): string {
 
     //
@@ -72,7 +58,7 @@ function parseLength(ms: number) {
 //
 // Extending length and other types which are to be added in future
 //
-export default function VideoItem({ item }: { item: Prisma.MovieCreateManyInput }) {
+export default function VideoItem({ item }: { item: Prisma.MovieCreateInput}) {
     return <li>
         <div className="relative w-[350px] ease-in-out duration-300">
             <img src={item.image || "images/placeholder.png"} className="rounded-lg h-52 w-full" />
