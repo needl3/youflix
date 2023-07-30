@@ -21,7 +21,7 @@ export default function User({ session }: { session: Session | null }): React.Re
     const [settingActive, setSettingActive] = useState(false)
 
     const UserImage = <img src={session?.user?.image || "#"}
-        alt="user-profile-photo" width='32px' height='32px'
+        alt="pfp" width='32px' height='32px'
         className="rounded-full"
         onClick={() => setSettingActive(!settingActive)} />
 

@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client"
 
-function parseViews(views: number): string {
+export function parseViews(views: number): string {
     const sizeNum = String(views).length
     let toReturn = String(views)
 
@@ -14,7 +14,7 @@ function parseViews(views: number): string {
     return toReturn + " views"
 }
 
-function parsePublishedDate(d: Date): string {
+export function parsePublishedDate(d: Date): string {
 
     //
     // Return X if publishedDate is not available or data not suitable

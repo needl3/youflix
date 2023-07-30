@@ -7,8 +7,8 @@ import { Prisma } from "@prisma/client"
 
 export default async function Movie({ params }: { params: { "id": string, "season"?: string, "episode"?: string } }) {
     const videoInfo = await db.movie.findUnique({ where: { id: params.id} })
-    return <div className="flex border">
-        <div className="flex flex-col w-full h-full">
+    return <div className="flex">
+        <div className="flex flex-col w-4/6 h-full">
             <VideoWindow source={params.id} season={params.season} episode={params.episode} />
             <VideoWindowDescription info={videoInfo as Prisma.MovieCreateInput} />
             <VideoWindowCommentSection source={params.id} />

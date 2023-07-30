@@ -38,7 +38,7 @@ export default function Genre() {
             // TODO: Blur effect around right of this button
             //
             scrollStatus !== -1 &&
-            <button className="bg-white hover:bg-slate-200 transition duration-300 sticky left-0 rounded-full self-cente rotate-180" onClick={moveLeft}>
+            <button className="bg-white hover:bg-slate-200 transition duration-300 sticky left-0 rounded-full self-cente p-2 rotate-90" onClick={moveLeft}>
                 <RightSign />
             </button >
         }
@@ -58,7 +58,7 @@ export default function Genre() {
         {
             // Replate selected requirement to element on View
             scrollStatus !== 1 &&
-            <button className="bg-white hover:bg-slate-200 transition duration-300 sticky right-0 rounded-full self-cente" onClick={moveRight}>
+            <button className="bg-white hover:bg-slate-200 transition duration-300 sticky right-0 rounded-full self-cente p-2 -rotate-90" onClick={moveRight}>
                 <RightSign />
             </button >
         }
