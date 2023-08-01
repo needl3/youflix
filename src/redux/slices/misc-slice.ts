@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const misc = createSlice({
     name: "misc",
     initialState: {
-        leftBarActive: false
+        leftBarActive: true
     },
     reducers: {
         toggleLeftBar: (state) => {

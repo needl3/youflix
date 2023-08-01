@@ -38,9 +38,11 @@ export default function VideoListSection({ name, videos, fetchMore }: { name?: s
     return <div className="px-3 bg-gradient-to-b from-[#00000022] to-[#000000dd] bg-[#00000055] rounded-lg pb-3 mb-5">
         {name && <h1 className="py-2 text-lg">{name}</h1>}
         <div className="relative flex">
-            <button className="bg-[#00000055] hover:bg-[#00000000] transition duration-300 absolute self-center rotate-180 z-30 h-3/4 -left-3 fill-[#aaaaaaaa] rounded-md" onClick={moveLeft}>
-                <RightSign />
-            </button >
+            <div className="bg-[#00000055] cursor-pointer hover:bg-[#00000000] transition duration-300 absolute self-center z-30 h-3/4 -left-3 fill-[#aaaaaaaa] rounded-md flex items-center" onClick={moveLeft}>
+                <button className="rotate-90">
+                    <RightSign />
+                </button>
+            </div>
 
             <ul className="gap-x-4 w-full h-full overflow-x-scroll flex no-scrollbar scroll-smooth" id="slider">
                 {
@@ -53,9 +55,11 @@ export default function VideoListSection({ name, videos, fetchMore }: { name?: s
                 </li>}
             </ul>
 
-            <button className="bg-[#00000055] hover:bg-[#00000000] transition duration-300 absolute self-center z-30 h-3/4 -right-3 fill-[#aaaaaaaa] rounded-md" onClick={moveRight}>
-                <RightSign />
-            </button >
+            <div className="bg-[#00000055] cursor-pointer hover:bg-[#00000000] transition duration-300 absolute self-center z-30 h-3/4 -right-3 fill-[#aaaaaaaa] rounded-md flex items-center" onClick={moveRight}>
+                <button className="-rotate-90">
+                    <RightSign />
+                </button>
+            </div>
         </div>
     </div>
 }

@@ -148,7 +148,7 @@ model Considering {
 }
 
 model Comment {
-    id                  String          @id
+    id                  String          @id @default(cuid())
     content             String
     publishedAt         DateTime
 
