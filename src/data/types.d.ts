@@ -1,4 +1,4 @@
-import { createComment, updateComment } from "@/app/movie/[id]/page";
+import { createComment, updateComment, fetchMoreVideos} from "@/app/movie/[id]/page";
 import { Prisma } from "@prisma/client";
 
 export type MovieDetail = {
@@ -16,3 +16,4 @@ export type CreateComment= {
 
 export type createCommentFunctionType = typeof createComment
 export type updateCommentFunctionType = typeof updateComment
+export type fetchMoreVideosFunctionType = typeof fetchMoreVideos

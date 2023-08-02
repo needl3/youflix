@@ -8,7 +8,7 @@ import SessionContext from '@/components/Context/SessionContext'
 import ReduxContext from '@/components/Context/ReduxContext'
 
 import LeftSection from "@/components/LeftSection";
-import GenreSection from "@/components/Genre";
+import RightSection from '@/components/RightSection'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,10 +32,7 @@ export default async function RootLayout({
                         <Nav />
                         <div className="flex">
                             <LeftSection />
-                            <div id="right-section" className="ml-8 overflow-x-hidden pr-3">
-                                <GenreSection />
-                                {children}
-                            </div>
+                            <RightSection children={children} />
                         </div>
                     </body>
                 </ReduxContext>

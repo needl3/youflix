@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import toggleLeftBar from "./slices/misc-slice";
+import miscReducer from "./slices/misc-slice";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 export const store = configureStore({
     reducer: {
-        toggleLeftBar
+        miscReducer
     }
 })
 

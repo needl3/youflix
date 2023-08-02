@@ -7,11 +7,14 @@ import { useState } from "react"
 import Followers from "@/assets/sidebar/followers.svg"
 import ToggleShowUp from "@/assets/sidebar/toggleup.svg"
 import ToggleShowDown from "@/assets/sidebar/toggledown.svg"
+import { STATES } from "@/redux/slices/misc-slice"
 
 const DEFAULT_SHOW = 4
 
 export default function LeftSection() {
-    const active = useAppSelector(state => state.toggleLeftBar.leftBarActive)
+    const mode = useAppSelector(state => state.miscReducer.mode)
+
+    const active = useAppSelector(state => state.miscReducer.leftBarActive)
     const [followShowAll, setFollowShowAll] = useState(false)
     const [followers, setFollowers] = useState(dummyFollowers.slice(0, DEFAULT_SHOW))
     const [menuSelected, setMenuSelected] = useState(mainMenu[0])
@@ -27,12 +30,14 @@ export default function LeftSection() {
         }, 2000)
     }
 
+    if (mode !== STATES.HOME) return <></>
+
     //
     // Major css bug
     // Padding changing in ul while toggling left side bar
     // Home icons should not change of it's position when toggling
     //
-    return <ul className={`py-3 ${active ? "px-3" : "" }`}>
+    return <ul className={`py-3 ${active ? "px-3" : ""}`}>
         {
             mainMenu.map(m => <Link href={m.href} key={m.name}>
                 <li

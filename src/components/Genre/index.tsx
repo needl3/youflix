@@ -5,6 +5,8 @@ import { useState } from "react";
 import SearchIcon from "@/assets/site/search.svg"
 import RightSign from "@/assets/genre/right.svg"
 import genre from "@/data/genre";
+import { useDispatch } from "react-redux";
+import { setGenre } from "@/redux/slices/misc-slice";
 
 export default function Genre() {
     //
@@ -12,6 +14,7 @@ export default function Genre() {
     //
     const [selected, setSelected] = useState(genre.at(0) || "All")
     const [scrollStatus, setScrollStatus] = useState(-1)
+    const dispatch = useDispatch()
 
     function moveLeft() {
         const slider = document.getElementById("genre-slider")
@@ -49,7 +52,10 @@ export default function Genre() {
             {
                 genre.map(g =>
                     <li className={`text-sm px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 transition duration-300 ${selected === g ? "bg-slate-400" : ""}`}
-                        onClick={() => setSelected(g)} key={g}>
+                        onClick={() => {
+                            setSelected(g)
+                            dispatch(setGenre(g))
+                        }} key={g}>
                         {g}
                     </li>
                 )

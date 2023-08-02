@@ -6,7 +6,7 @@ import db from "@/server/prisma"
 import { Prisma } from "@prisma/client"
 import { TAKE } from "@/data/misc"
 import { getServerSession } from "next-auth"
-import { CommentDetail } from "@/data/types"
+import { CommentDetail, MovieDetail } from "@/data/types"
 import { redirect } from "next/navigation"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
@@ -49,6 +49,13 @@ export async function updateComment({id, content}: {id: string, content: string}
     console.log("updating comment")
 }
 
+export async function fetchMoreVideos({ filter, page, info }:
+    { filter: any /* change to a more defined type */, page: number, info: MovieDetail}) {
+    "use server"
+    
+    return [] as MovieDetail[]
+}
+
 export default async function Movie({ params }: { params: { "id": string, "season"?: string, "episode"?: string } }) {
     const videoInfo = await db.movie.findUnique({ where: { id: params.id } })
     const commentInfo = await fetchMoreComments(params.id)
@@ -56,7 +63,7 @@ export default async function Movie({ params }: { params: { "id": string, "seaso
         <div className="flex flex-col w-4/6 h-full">
             <VideoWindow source={params.id} season={params.season} episode={params.episode} />
             <VideoWindowDescription info={videoInfo} />
-            <VideoWindowCommentSection items={commentInfo} fetchMore={fetchMoreComments} createComment={createComment} />
+            <VideoWindowCommentSection items={commentInfo} fetchMore={fetchMoreComments} createComment={createComment} updateComment={updateComment}/>
         </div>
         <VideoWindowSideBar info={videoInfo as Prisma.MovieCreateInput} />
     </div>
