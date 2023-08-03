@@ -22,7 +22,7 @@ async function fetchMoreComments(movieId: string, page = 0, limit = TAKE) {
     })
 }
 
-export async function createComment({ content, parentCommentId, movieId }: CommentDetail){
+export async function createComment({ content, parentCommentId, movieId }: CommentDetail) {
     "use server"
 
     const session = await getServerSession(authOptions)
@@ -43,28 +43,34 @@ export async function createComment({ content, parentCommentId, movieId }: Comme
     return res
 }
 
-export async function updateComment({id, content}: {id: string, content: string}){
+export async function updateComment({ id, content }: { id: string, content: string }) {
     "use server"
 
     console.log("updating comment")
 }
 
 export async function fetchMoreVideos({ filter, page, info }:
-    { filter: any /* change to a more defined type */, page: number, info: MovieDetail}) {
+    { filter: any /* change to a more defined type */, page: number, info: MovieDetail }) {
     "use server"
-    
-    return [] as MovieDetail[]
+
+    return await db.movie.findMany({
+        where: filter,
+        skip: page * TAKE,
+        take: 3
+    })
 }
 
 export default async function Movie({ params }: { params: { "id": string, "season"?: string, "episode"?: string } }) {
     const videoInfo = await db.movie.findUnique({ where: { id: params.id } })
     const commentInfo = await fetchMoreComments(params.id)
-    return <div className="flex">
+    const videos = await fetchMoreVideos({ page: 0, info: videoInfo, filter: {} })
+
+    return <div className="flex pt-5">
         <div className="flex flex-col w-4/6 h-full">
             <VideoWindow source={params.id} season={params.season} episode={params.episode} />
             <VideoWindowDescription info={videoInfo} />
-            <VideoWindowCommentSection items={commentInfo} fetchMore={fetchMoreComments} createComment={createComment} updateComment={updateComment}/>
+            <VideoWindowCommentSection items={commentInfo} fetchMore={fetchMoreComments} createComment={createComment} updateComment={updateComment} />
         </div>
-        <VideoWindowSideBar info={videoInfo as Prisma.MovieCreateInput} />
+        <VideoWindowSideBar videos={videos} fetchMore={fetchMoreVideos} info={videoInfo as Prisma.MovieCreateInput} />
     </div>
 }

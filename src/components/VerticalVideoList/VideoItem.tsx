@@ -51,7 +51,7 @@ export function parsePublishedDate(d: Date): string {
     return parsedTime + " ago"
 }
 
-function parseLength(ms: number) {
+export function parseLength(ms: number) {
     const oneHour = 60 * 60 * 1000
     const oneMin = oneHour / 60
     const oneSec = oneMin / 60
