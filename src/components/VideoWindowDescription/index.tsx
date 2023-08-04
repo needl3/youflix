@@ -15,7 +15,7 @@ export default function VideoWindowDescription({ info }: { info: MovieDetail }) 
         <h1 className="text-lg font-bold">{info.name}</h1>
         <div className="flex justify-between">
             <div className="flex gap-x-3 items-center">
-                <img src="https://lh3.googleusercontent.com/a/AAcHTtciQ-Y43Wmd66ghFxSf4XtSRDMCVqlv5q3Aauy1wDpxdjE=s96-c" className="rounded-full h-11 w-auto" />
+                <img src="https://lh3.googleusercontent.com/a/AAcHTtciQ-Y43Wmd66ghFxSf4XtSRDMCVqlv5q3Aauy1wDpxdjE=s96-c" className="rounded-full h-10 w-auto" />
                 <div>
                     <h2 className="font-bold">{(info.productionHouse as string[]).at(0) || "Not Available"}</h2>
                     <p className="text-sm">{"10.3K Subscribers"}</p>

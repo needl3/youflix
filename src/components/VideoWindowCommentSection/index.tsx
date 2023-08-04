@@ -8,7 +8,7 @@ import { useParams } from "next/navigation"
 import CommentItem from "./CommentItem"
 
 
-export default function CommentList({ items, fetchMore, createComment, updateComment}:
+export default function CommentList({ items, fetchMore, createComment, updateComment }:
     {
         items: CommentDetail[],
         fetchMore: Function,
@@ -26,7 +26,7 @@ export default function CommentList({ items, fetchMore, createComment, updateCom
             return;
         }
         setIsLoading(true)
-        fetchMore(page)
+        fetchMore(items.at(0).movieId, page)
             .then((r: any) => {
                 setPaginatingComments([...paginatingComments, ...r])
                 setPage(page + 1)

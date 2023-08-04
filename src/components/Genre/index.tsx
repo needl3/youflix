@@ -45,13 +45,13 @@ export default function Genre() {
                 <RightSign />
             </button >
         }
-        <button className="px-3 rounded-lg bg-slate-100 hover:bg-slate-200 transition duration-300 align-middle">
+        <button className="px-3 rounded-lg bg-slate-100 hover:bg-slate-200 transition duration-300 align-middle cursor-pointer">
             <SearchIcon />
         </button>
         <ul className="flex gap-x-2 shrink-0">
             {
                 genre.map(g =>
-                    <li className={`text-sm px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 transition duration-300 ${selected === g ? "bg-slate-400" : ""}`}
+                    <li className={`text-sm px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 transition duration-300 ${selected === g ? "bg-slate-400" : ""} cursor-pointer`}
                         onClick={() => {
                             setSelected(g)
                             dispatch(setGenre(g))

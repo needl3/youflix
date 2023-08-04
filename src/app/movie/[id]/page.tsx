@@ -10,8 +10,10 @@ import { CommentDetail, MovieDetail } from "@/data/types"
 import { redirect } from "next/navigation"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
-async function fetchMoreComments(movieId: string, page = 0, limit = TAKE) {
+async function fetchMoreComments(movieId: string, page: number, limit = TAKE) {
     "use server"
+
+    if (!page) page = 0
 
     return await db.comment.findMany({
         where: {
@@ -27,8 +29,7 @@ export async function createComment({ content, parentCommentId, movieId }: Comme
 
     const session = await getServerSession(authOptions)
 
-    if (!session?.user.id)
-        return redirect("/api/auth/signin")
+    if (!session?.user.id) return
 
     const res = await db.comment.create({
         data: {
@@ -45,6 +46,9 @@ export async function createComment({ content, parentCommentId, movieId }: Comme
 
 export async function updateComment({ id, content }: { id: string, content: string }) {
     "use server"
+    const session = await getServerSession(authOptions)
+    if (!session?.user.id)
+        return redirect("/api/auth/signin")
 
     console.log("updating comment")
 }
@@ -56,17 +60,17 @@ export async function fetchMoreVideos({ filter, page, info }:
     return await db.movie.findMany({
         where: filter,
         skip: page * TAKE,
-        take: 3
+        take: TAKE
     })
 }
 
 export default async function Movie({ params }: { params: { "id": string, "season"?: string, "episode"?: string } }) {
     const videoInfo = await db.movie.findUnique({ where: { id: params.id } })
-    const commentInfo = await fetchMoreComments(params.id)
+    const commentInfo = await fetchMoreComments(params.id, 0)
     const videos = await fetchMoreVideos({ page: 0, info: videoInfo, filter: {} })
 
-    return <div className="flex pt-5">
-        <div className="flex flex-col w-4/6 h-full">
+    return <div className="pt-5 grid grid-cols-11">
+        <div className="flex flex-col col-span-7">
             <VideoWindow source={params.id} season={params.season} episode={params.episode} />
             <VideoWindowDescription info={videoInfo} />
             <VideoWindowCommentSection items={commentInfo} fetchMore={fetchMoreComments} createComment={createComment} updateComment={updateComment} />
