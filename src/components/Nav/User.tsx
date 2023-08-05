@@ -23,7 +23,9 @@ export default function User({ session }: { session: Session | null }): React.Re
     const UserImage = <img src={session?.user?.image || "#"}
         alt="pfp" width='32px' height='32px'
         className="rounded-full"
-        onClick={() => setSettingActive(!settingActive)} />
+        onClick={() => setSettingActive(!settingActive)}
+        referrerPolicy="no-referrer"
+        />
 
 
     return <>

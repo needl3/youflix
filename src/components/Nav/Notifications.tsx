@@ -40,7 +40,7 @@ export default function Notifications() {
                         {
                             notifs.map((n: NotificationInterface) => {
                                 return <li key={n.title} className='flex items-center p-4'>
-                                    <img src={n.uploader} alt={`${n.title} image thumbnail`} width="60em"/>
+                                    <img src={n.uploader} alt={`${n.title} image thumbnail`} width="60em" referrerPolicy='no-referrer'/>
                                     <h2 className='pl-4'>{n.title}</h2>
                                 </li>
                             })

@@ -57,7 +57,7 @@ export default function LeftSection() {
                 <>
                     {followers.slice(0, followShowAll ? -1 : DEFAULT_SHOW).map(f => <Link href={`profile/${f.href}`} key={f.name}>
                         <li className="flex rounded-lg hover: cursor-pointer hover:bg-slate-400 text-sm items-center py-2 gap-x-6 pl-3 pr-14">
-                            <img src={f.img} className="rounded-full" width="25px" height="25px" />
+                            <img src={f.img} className="rounded-full" width="25px" height="25px" referrerPolicy="no-referrer"/>
                             <h1>{f.name}</h1>
                         </li>
                     </Link>)

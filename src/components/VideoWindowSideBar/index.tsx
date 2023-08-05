@@ -39,7 +39,7 @@ export default function VideoWindowSidebar({ fetchMore, info, videos }: { fetchM
             {paginatingVideos.map(video => <Link href={`movie/${video.id}`} key={video.id}>
                 <li className="py-1 grid grid-cols-11">
                     <div className="relative h-fit w-full col-span-5">
-                        <img src={video.image || "images/placeholder.png"} className="rounded-lg" />
+                        <img src={video.image || "images/placeholder.png"} className="rounded-lg" referrerPolicy="no-referrer"/>
                         <span className="absolute bottom-1 right-1 bg-white rounded-md px-1 text-sm">{parseLength(/* item.length */0 * 60 * 60 * 1000)}</span>
                     </div>
                     <div className="col-span-6 pl-3">

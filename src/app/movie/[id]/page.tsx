@@ -10,7 +10,7 @@ import { CommentDetail, MovieDetail } from "@/data/types"
 import { redirect } from "next/navigation"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
-async function fetchMoreComments(movieId: string, page: number, limit = TAKE) {
+export async function fetchMoreComments(movieId: string, page: number, limit = TAKE) {
     "use server"
 
     if (!page) page = 0
@@ -20,7 +20,7 @@ async function fetchMoreComments(movieId: string, page: number, limit = TAKE) {
             movieId
         },
         skip: page * limit,
-        take: limit
+        take: 2
     })
 }
 

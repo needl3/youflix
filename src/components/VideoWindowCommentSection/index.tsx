@@ -1,9 +1,9 @@
 "use client"
 
 import Filter from "@/assets/comments/filter.svg"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import AddCommentComponent from "./AddCommentComponent"
-import { CommentDetail, createCommentFunctionType, updateCommentFunctionType } from "@/data/types"
+import { CommentDetail, createCommentFunctionType, fetchMoreCommentFunctionType, updateCommentFunctionType } from "@/data/types"
 import { useParams } from "next/navigation"
 import CommentItem from "./CommentItem"
 
@@ -11,7 +11,7 @@ import CommentItem from "./CommentItem"
 export default function CommentList({ items, fetchMore, createComment, updateComment }:
     {
         items: CommentDetail[],
-        fetchMore: Function,
+        fetchMore: fetchMoreCommentFunctionType,
         createComment: createCommentFunctionType,
         updateComment: updateCommentFunctionType
     }) {
@@ -26,7 +26,7 @@ export default function CommentList({ items, fetchMore, createComment, updateCom
             return;
         }
         setIsLoading(true)
-        fetchMore(items.at(0).movieId, page)
+        fetchMore(items.at(0)?.movieId, page)
             .then((r: any) => {
                 setPaginatingComments([...paginatingComments, ...r])
                 setPage(page + 1)
@@ -44,7 +44,7 @@ export default function CommentList({ items, fetchMore, createComment, updateCom
 
     return <div className="w-full">
         <div className="flex gap-x-5 pb-5">
-            <p className="text-xl">{paginatingComments.length || "432 Comments"}</p> {/* Remove this 432 text*/}
+            <p className="text-xl">{paginatingComments.length + " Comments"}</p> {/* Remove this 432 text*/}
             <button className="font-bold flex gap-x-2"><Filter /> Sort By</button>
         </div>
         <AddCommentComponent initialCommentDetail={{
@@ -53,8 +53,8 @@ export default function CommentList({ items, fetchMore, createComment, updateCom
         }} createComment={createComment} />
         <ul>
             {
-                paginatingComments.map(comment => <li>
-                    <CommentItem createComment={createComment} updateComment={updateComment} info={comment} />
+                paginatingComments.map(comment => <li key={comment.id}>
+                    <CommentItem disableSubComments={false} createComment={createComment} updateComment={updateComment} info={comment} />
                 </li>
                 )
             }
