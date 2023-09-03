@@ -3,11 +3,11 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Nav from '@/components/Nav'
 import { getServerSession } from 'next-auth'
-import authOptions from "@/pages/api/auth/[...nextauth]"
-import SessionContext from '@/components/Context/SessionContext';
+import authOptions from '@/pages/api/auth/[...nextauth]'
+import SessionContext from '@/components/Context/SessionContext'
 import ReduxContext from '@/components/Context/ReduxContext'
 
-import LeftSection from "@/components/LeftSection";
+import LeftSection from '@/components/LeftSection'
 import RightSection from '@/components/RightSection'
 
 const inter = Inter({ subsets: ['latin'] })

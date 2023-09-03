@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import ToggleButton from '@/assets/site/toggle.svg'
 import SiteLogo from '@/assets/site/logo.svg'
@@ -16,7 +16,10 @@ export default function Nav() {
         <>
             <nav className="flex justify-between px-4 items-center sticky w-full z-10">
                 <div className="flex items-center">
-                    <div className="p-2 rounded-full hover:bg-slate-200 hover:cursor-pointer" onClick={() => dispatch(toggleLeftBar())}>
+                    <div
+                        className="p-2 rounded-full hover:bg-slate-200 hover:cursor-pointer"
+                        onClick={() => dispatch(toggleLeftBar())}
+                    >
                         <ToggleButton />
                     </div>
                     <div className="p-4 hover">
@@ -26,7 +29,7 @@ export default function Nav() {
                     </div>
                 </div>
                 <SearchBar />
-                <User session={session.data}/> 
+                <User session={session.data} />
             </nav>
         </>
     )

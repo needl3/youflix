@@ -1,21 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 export enum STATES {
     HOME,
     MOVIE,
     SERIES,
-    PROFILE
+    PROFILE,
 }
 
 export const misc = createSlice({
-    name: "misc",
+    name: 'misc',
     initialState: {
         leftBarActive: true,
         mode: STATES.HOME,
-        genre: ""
+        genre: '',
     },
     reducers: {
-        toggleLeftBar: (state) => {
+        toggleLeftBar: state => {
             state.leftBarActive = !state.leftBarActive
         },
         selectMode: (state, { payload }) => {
@@ -23,8 +23,8 @@ export const misc = createSlice({
         },
         setGenre: (state, { payload }) => {
             state.genre = payload.data
-        }
-    }
+        },
+    },
 })
 
 export const { toggleLeftBar, selectMode, setGenre } = misc.actions

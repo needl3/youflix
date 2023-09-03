@@ -1,20 +1,32 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import VideoItem from "./VideoItem"
-import { useEffect, useState } from "react";
-import VideoSkeleton from "./VideoSkeleton";
-import { TAKE } from "@/data/misc";
-import { Prisma } from "@prisma/client";
+import Link from 'next/link'
+import VideoItem from './VideoItem'
+import { useEffect, useState } from 'react'
+import VideoSkeleton from './VideoSkeleton'
+import { TAKE } from '@/data/misc'
+import { Prisma } from '@prisma/client'
 
-export default function VideoListSection({ name, videos, fetchMore }: { name?: string, videos: Prisma.MovieCreateInput[], fetchMore: Function }) {
+export default function VideoListSection({
+    name,
+    videos,
+    fetchMore,
+}: {
+    name?: string
+    videos: Prisma.MovieCreateInput[]
+    fetchMore: Function
+}) {
     const [paginatingVideos, setPaginatingVideos] = useState(videos)
     const [isLoading, setIsLoading] = useState(false)
     const [page, setPage] = useState(1)
 
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) {
-            return;
+        if (
+            window.innerHeight + document.documentElement.scrollTop !==
+                document.documentElement.offsetHeight ||
+            isLoading
+        ) {
+            return
         }
         setIsLoading(true)
         fetchMore(page)
@@ -24,22 +36,24 @@ export default function VideoListSection({ name, videos, fetchMore }: { name?: s
             })
             .catch((e: any) => console.error(e))
             .finally(() => setIsLoading(false))
-    };
+    }
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [isLoading]);
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [isLoading])
 
-    return <div className="px-3">
-        {name && <h1>{name}</h1>}
-        <ul className="flex gap-x-4 flex-wrap justify-around">
-            {
-                paginatingVideos.map(i => <Link href={`/movie/${i.id}`} key={i.id}>
-                    <VideoItem item={i} />
-                </Link>)
-            }
-            {isLoading && <VideoSkeleton items={TAKE} />}
-        </ul>
-    </div>
+    return (
+        <div className="px-3">
+            {name && <h1>{name}</h1>}
+            <ul className="flex gap-x-4 flex-wrap justify-around">
+                {paginatingVideos.map(i => (
+                    <Link href={`/movie/${i.id}`} key={i.id}>
+                        <VideoItem item={i} />
+                    </Link>
+                ))}
+                {isLoading && <VideoSkeleton items={TAKE} />}
+            </ul>
+        </div>
+    )
 }

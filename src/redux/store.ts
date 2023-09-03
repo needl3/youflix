@@ -1,11 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
-import miscReducer from "./slices/misc-slice";
-import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { configureStore } from '@reduxjs/toolkit'
+import miscReducer from './slices/misc-slice'
+import { TypedUseSelectorHook, useSelector } from 'react-redux'
 
 export const store = configureStore({
     reducer: {
-        miscReducer
-    }
+        miscReducer,
+    },
 })
 
 export type RootState = ReturnType<typeof store.getState>

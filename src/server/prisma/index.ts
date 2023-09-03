@@ -1,14 +1,15 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from '@prisma/client'
 
 async function testDBConnection(db: PrismaClient) {
     try {
         await db.$connect()
-        console.log("\x1b[32mConnected to database\x1b[0m")
+        console.log('\x1b[32mConnected to database\x1b[0m')
     } catch (e) {
-        console.error("\x1b[31m[WARNING] \x1b[33mCouldn't connect to database\x1b[0m")
+        console.error(
+            "\x1b[31m[WARNING] \x1b[33mCouldn't connect to database\x1b[0m"
+        )
     }
 }
-
 
 const globalForPrisma = global as unknown as { db: PrismaClient }
 

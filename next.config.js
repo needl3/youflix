@@ -4,14 +4,14 @@ const nextConfig = {
         config.module.rules.push({
             test: /\.svg$/,
             use: [
-                { loader: "@svgr/webpack", options: { runtimeConfig: false } },
+                { loader: '@svgr/webpack', options: { runtimeConfig: false } },
             ],
         })
-        config.externals.push("canvas")
+        config.externals.push('canvas')
         return config
     },
     experimental: {
-        serverActions: true
+        serverActions: true,
     },
 }
 
