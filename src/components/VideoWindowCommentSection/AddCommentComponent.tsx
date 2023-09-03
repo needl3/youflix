@@ -25,7 +25,7 @@ export default function AddCommentComponent({ initialCommentDetail, createCommen
     return < div className="flex items-center gap-x-4 pb-5" >
         <img src={session.data?.user.image || "https://yt3.ggpht.com/a/default-user=s48-c-k-c0x00ffffff-no-rj"} className="h-10 w-auto rounded-full self-start" referrerPolicy="no-referrer"/>
         <div className="w-full relative">
-            <input name="content" type="text" placeholder="Add a comment..." onClick={() => setActiveComment(true)} className={`w-full mb-3 border-b transition duration-300 ${activeComment ? "border-b-black" : ""} focus:outline-none`} onChange={handleCommentChange} />
+            <input name="content" type="text" placeholder="Add a comment..." onClick={() => setActiveComment(true)} className={`bg-transparent w-full mb-3 border-b transition duration-300 ${activeComment ? "border-b-black" : ""} focus:outline-none`} onChange={handleCommentChange} />
             {activeComment && <div className="flex justify-between items-center fr transition duration-1000">
                 <div className="hover:bg-slate-200 p-2 rounded-full cursor-pointer">
                     <Emoticon />

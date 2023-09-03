@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
     provider     = "postgresql"
-    url          = env("DATABASE_URL")
+    url          = env("DATABASE_URL") 
     relationMode = "foreignKeys"
 }
 
@@ -159,7 +159,7 @@ model Comment {
     movie               Movie           @relation(fields: [movieId], references: [id])
 
     parentCommentId     String?
-    comment             Comment?        @relation(name: "parentCommentRelation", fields: [parentCommentId], references: [id], onDelete: NoAction)
+    comment             Comment?        @relation(name: "parentCommentRelation", fields: [parentCommentId], references: [id], onDelete: Cascade)
 
     parentComment       Comment[]       @relation(name: "parentCommentRelation")
 }

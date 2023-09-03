@@ -10,7 +10,7 @@ export default function VideoWindow({ source, episode, season }: { source: strin
         dispatch(misc.actions.selectMode(STATES.MOVIE))
     }, [])
 
-    return <div className="h-[29em] bg-gradient-to-br from-[#00000000] to-[#000000aa] animate-pulse">
-    </div>
+    return <>
+    </>
 }
 

@@ -73,7 +73,7 @@ export function parseLength(ms: number) {
 // Extending length and other types which are to be added in future
 //
 export default function VideoItem({ item }: { item: Prisma.MovieCreateManyInput }) {
-    return <li>
+    return <li className="w-[19.5rem]">
         <div className="relative">
             <img src={item.image || "images/placeholder.png"} className="rounded-lg h-52 w-full" />
 

@@ -33,7 +33,7 @@ export default function VideoListSection({ name, videos, fetchMore }: { name?: s
 
     return <div className="px-3">
         {name && <h1>{name}</h1>}
-        <ul className="grid grid-cols-3 gap-x-4">
+        <ul className="flex gap-x-4 flex-wrap justify-around">
             {
                 paginatingVideos.map(i => <Link href={`/movie/${i.id}`} key={i.id}>
                     <VideoItem item={i} />

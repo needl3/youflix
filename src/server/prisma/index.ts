@@ -12,11 +12,11 @@ async function testDBConnection(db: PrismaClient) {
 
 const globalForPrisma = global as unknown as { db: PrismaClient }
 
-const db = globalForPrisma.db|| new PrismaClient()
+const db = globalForPrisma.db || new PrismaClient()
 
 if (process.env.NODE_ENV !== 'production') {
-    if(!!!globalForPrisma.db) testDBConnection(db)
-    globalForPrisma.db = db 
+    if (!!!globalForPrisma.db) testDBConnection(db)
+    globalForPrisma.db = db
 }
 
 export default db

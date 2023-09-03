@@ -69,12 +69,20 @@ export default async function Movie({ params }: { params: { "id": string, "seaso
     const commentInfo = await fetchMoreComments(params.id, 0)
     const videos = await fetchMoreVideos({ page: 0, info: videoInfo, filter: {} })
 
-    return <div className="pt-5 grid grid-cols-11">
-        <div className="flex flex-col col-span-7">
-            <VideoWindow source={params.id} season={params.season} episode={params.episode} />
-            <VideoWindowDescription info={videoInfo} />
-            <VideoWindowCommentSection items={commentInfo} fetchMore={fetchMoreComments} createComment={createComment} updateComment={updateComment} />
+    return <div className="pt-5 flex w-screen px-[7rem]">
+        <div className="flex flex-col items-center w-full">
+            <div className="bg-gradient-to-br from-[#00000000] to-[#000000aa] animate-pulse h-[45rem] rounded-xl w-full">
+                <VideoWindow source={params.id} season={params.season} episode={params.episode} />
+            </div>
+            <div className="w-full flex flex-col gap-y-3 py-4 overflow-x-hidden">
+                <VideoWindowDescription info={videoInfo} />
+            </div>
+            <div className="w-full">
+                <VideoWindowCommentSection items={commentInfo} fetchMore={fetchMoreComments} createComment={createComment} updateComment={updateComment} />
+            </div>
         </div>
-        <VideoWindowSideBar videos={videos} fetchMore={fetchMoreVideos} info={videoInfo as Prisma.MovieCreateInput} />
+        <div id="right-section" className="pl-6 overflow-x-hidden w-[37rem]">
+            <VideoWindowSideBar videos={videos} fetchMore={fetchMoreVideos} info={videoInfo as Prisma.MovieCreateInput} />
+        </div>
     </div>
 }

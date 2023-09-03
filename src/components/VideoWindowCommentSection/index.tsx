@@ -42,7 +42,7 @@ export default function CommentList({ items, fetchMore, createComment, updateCom
 
 
 
-    return <div className="w-full">
+    return <>
         <div className="flex gap-x-5 pb-5">
             <p className="text-xl">{paginatingComments.length + " Comments"}</p> {/* Remove this 432 text*/}
             <button className="font-bold flex gap-x-2"><Filter /> Sort By</button>
@@ -59,5 +59,5 @@ export default function CommentList({ items, fetchMore, createComment, updateCom
                 )
             }
         </ul>
-    </div>
+    </>
 }

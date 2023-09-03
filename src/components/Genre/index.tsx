@@ -34,7 +34,7 @@ export default function Genre() {
         }
     }
 
-    return <div id="genre-slider" className="flex gap-x-1 py-3 overflow-x-scroll no-scrollbar relative items-center scroll-smooth" >
+    return <>
         {
             //
             // TODO: Replate selected requirement to element on View
@@ -68,5 +68,5 @@ export default function Genre() {
                 <RightSign />
             </button >
         }
-    </div>
+    </>
 }

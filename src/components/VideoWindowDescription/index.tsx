@@ -11,7 +11,7 @@ import { useState } from "react"
 export default function VideoWindowDescription({ info }: { info: MovieDetail }) {
     const [descriptionActive, setDescriptionActive] = useState(false)
 
-    return <div className="w-full flex flex-col gap-y-3 py-4 overflow-x-hidden">
+    return <>
         <h1 className="text-lg font-bold">{info.name}</h1>
         <div className="flex justify-between">
             <div className="flex gap-x-3 items-center">
@@ -50,5 +50,5 @@ export default function VideoWindowDescription({ info }: { info: MovieDetail }) 
                 {descriptionActive ? "Show less" : "Show more"}
             </button>
         </div>
-    </div>
+    </>
 }
